@@ -7,6 +7,8 @@ const Home = () => import('views/home/Home')
 const Category = () => import('views/category/Category')
 const ShopCart = () => import('views/shopcart/ShopCart')
 const Profile = () => import('views/profile/Profile')
+const HomeTest = () => import('views/home/children/HomeTest')
+const test = () => import('components/test')
 
 const routes = [
     {
@@ -15,7 +17,17 @@ const routes = [
     },
     {
         path: '/home',
-        component: Home
+        component: Home,
+        children:[
+            {
+                path: 'pop',
+                component: HomeTest
+            },
+            {
+                path: 'choiced',
+                component: HomeTest
+            }
+        ]
     },
     {
         path: '/category',
@@ -28,7 +40,7 @@ const routes = [
     {
         path: '/profile',
         component: Profile
-    },
+    }
 ]
 export default new Router({
     routes,
