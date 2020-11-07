@@ -2,7 +2,7 @@
   <div class='tab-control'>
       <div v-for='(item, index) in titles' :key='item' class='tab-control-item' 
       :class='{active: (index === currentIndex)}' @click='itemClick(index)'>
-          <span @click='titleClick'>{{item}}</span>
+          <span @click='titleClick(index)'>{{item}}</span>
       </div>
   </div>
 </template>
@@ -33,8 +33,8 @@ export default {
             this.currentIndex = index;
             this.$emit('tabClick1', index)
         },
-        titleClick(){
-            this.$router.push(this.path[this.currentIndex])
+        titleClick(index){
+            this.$router.push(this.path[index]).catch(err => {err})
         }
     }
 

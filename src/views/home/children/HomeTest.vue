@@ -2,7 +2,7 @@
   <div class='home-test'>
       <div v-for='item in contents' :key='item.goods_id' class='home-test-item'>
           <img :src="item.img" alt="" @load="imgLoad">
-          <div>{{item.good_id}}</div>
+          <div>{{item.goods_id}}</div>
           <!-- <div>{{item.goods_name + '' + '￥' + parseInt(item.goods_price).toFixed(2)}}</div> -->
       </div>
   </div>

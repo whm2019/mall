@@ -31,4 +31,5 @@ import { getHomeContent, getHomeClothes } from 'network/home'
 // }).then(res => {
 //   console.log(res)
 // })
+// console.log(typeof(setTimeout(console.log(1), 1000)))
 

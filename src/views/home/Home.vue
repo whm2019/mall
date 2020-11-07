@@ -236,6 +236,12 @@ export default {
     });
     // console.log(this.$refs.tabControl.currentIndex)
   },
+  activated(){
+    console.log('this is a activated happened')
+  },
+  deactivated(){
+    console.log('this is a deactivated')
+  },
   methods: {
     backClick() {
       // console.log(this.$refs.scroll)
@@ -289,6 +295,7 @@ export default {
   z-index: 9;
 }
 .tabControl {
+  /* position:relative行不通 */
   position: absolute;
   top: 44px;
   right: 0;
