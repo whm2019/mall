@@ -459,21 +459,27 @@ export default {
       this.offsetTops.push(this.$refs.second.offsetTop);
       this.offsetTops.push(this.$refs.third.offsetTop);
       this.offsetTops.push(this.$refs.fourth.offsetTop);
+      this.offsetTops.push(Number.MAX_VALUE)//js中Number类的最大值
       console.log(this.offsetTops)
     },
     scroll(position){
         this.positionY = -position.y
         // console.log(this.offsetTops[0]
-
-        if(this.positionY < this.offsetTops[1]){
-            this.$refs.nav.currentIndex = 0
-        }else if(this.positionY < this.offsetTops[2]){
-            this.$refs.nav.currentIndex = 1
-        }else if(this.positionY < this.offsetTops[3]){            
-            this.$refs.nav.currentIndex = 2
-        }else {
-            this.$refs.nav.currentIndex = 3
+        for(let i = 0; i < this.offsetTops.length - 1; i ++){
+            if(this.positionY < this.offsetTops[i+1]){
+                this.$refs.nav.currentIndex = i
+                break;//一旦找到数组中符合条件的最小值并传给currentIndex后即跳出循环
+            }
         }
+        // if(this.positionY < this.offsetTops[1]){
+        //     this.$refs.nav.currentIndex = 0
+        // }else if(this.positionY < this.offsetTops[2]){
+        //     this.$refs.nav.currentIndex = 1
+        // }else if(this.positionY < this.offsetTops[3]){            
+        //     this.$refs.nav.currentIndex = 2
+        // }else {
+        //     this.$refs.nav.currentIndex = 3
+        // }
     }
   },
   mounted() {
