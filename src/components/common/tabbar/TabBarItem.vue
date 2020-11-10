@@ -8,7 +8,7 @@
         <div v-else>
             <slot name="item-icon-active"></slot>
         </div>
-        <div>
+        <div :style='activeStyle'>
             <slot name="item-text"></slot>
         </div>
     </div>
@@ -57,7 +57,7 @@ export default {
     width: 24px;
     height: 24px;
     vertical-align: middle;
-    margin-bottom: 0px;
+    margin-bottom: 2px;
   }
 
 </style>

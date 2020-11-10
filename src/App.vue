@@ -4,6 +4,7 @@
     <router-link to='/category'></router-link>
     <router-link to='/shopcart'></router-link>
     <router-link to='/profile'></router-link>
+    <router-link to='/detail'></router-link>
     <keep-alive>
       <router-view></router-view>
     </keep-alive>

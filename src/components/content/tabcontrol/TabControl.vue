@@ -1,7 +1,7 @@
 <template>
   <div class='tab-control'>
       <div v-for='(item, index) in titles' :key='item' class='tab-control-item' 
-      :class='{active: (index === currentIndex)}' @click='itemClick(index)'>
+      :class='{active: (index === currentIndex)}' @click='itemClick(item,index)'>
           <span @click='titleClick(index)'>{{item}}</span>
       </div>
   </div>
@@ -29,9 +29,16 @@ export default {
         }
     },
     methods:{
-        itemClick(index){
+        itemClick(item,index){
+            // console.log(index + item)//这里面index从0开始
+            let n;
+            // for(n in 3){//这个循环无法打印
+                           //用in 这种方式行不通，用初值；终值；++这种循环可以
+            //     console.log('begin!')
+            //     console.log(n)
+            // }
             this.currentIndex = index;
-            this.$emit('tabClick1', index)
+            this.$emit('tabClick', index)
         },
         titleClick(index){
             this.$router.push(this.path[index]).catch(err => {err})

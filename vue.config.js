@@ -40,6 +40,24 @@ module.exports={//每次修改config都要重新run serve
           pathRewrite:{
             '^/local': ''
           }
+        },
+        // '/some-videos':{
+        //   target: 'https://api.apiopen.top',
+        //   pathRewrite:{
+        //     '^/some-videos': ''
+        //   }
+        // },
+        '/mogujie': {
+          target: 'http://106.54.54.237:8000/api/mn',
+          pathRewrite: {
+            '^/mogujie': ''
+          }
+        },
+        '/imgbaidu':{
+          target:'https://timgsa.baidu.com',
+          pathRewrite:{
+            '^/imgbaidu': ''
+          }
         }
       }
     }

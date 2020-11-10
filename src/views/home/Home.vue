@@ -1,14 +1,14 @@
 <template>
   <div id="home">
     <navi-bar class="home-nav">
-      <div slot="center">购物街</div>
+      <div slot="center" @click="detailClick">购物街</div>
     </navi-bar>
     <tab-control
       :titles="['流行', '新款', '精选']"
       class="tab-control tabControl"
       :path="['/home/pop', '/category', '/home/choiced']"
       v-show="isTabShow"
-      @tabClick1='tabClick'
+      @tabClick='tabClick'
       ref='tabControl1'
     >
     </tab-control>
@@ -31,9 +31,9 @@
       <tab-control
         :titles="['流行', '新款', '精选']"
         class="tab-control"
-        :path="['/home/pop', '/category', '/home/choiced']"
+        :path="['/home/pop', '/home/videos', '/home/choiced']"
         ref="tabControl2"
-        @tabClick1="tabClick"
+        @tabClick="tabClick"
       >
       </tab-control>
       <home-test :contents="datas"></home-test>
@@ -161,6 +161,8 @@ import {
   getHomeContent,
   getHomeIt,
   getHomeExp,
+  getHomeVideos,
+  getHomeShop
 } from "network/home";
 
 export default {
@@ -194,6 +196,18 @@ export default {
     test,
   },
   created() {
+    this.banners=[
+      {
+        img: require('assets/img/swiper/1.jpg'),//require函数解决了图片不显示问题。
+                                                //同时这里assets前如果加上‘~’会报错
+        link: 'javascript:(void)0;'
+      },
+      {
+        img: require('assets/img/swiper/2.jpg'),
+        link: 'javascript:(void)0;'
+      }
+    ]
+    // console.log(this.banners)
     // getHomeMutidata().then((res) => {
     //   //请求数据并赋给banners, recommends
     //   console.log(res);
@@ -203,7 +217,7 @@ export default {
     // alert(1);
     getHomeContent()
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         this.contents.first = res.data.data.list.list;
         this.datas = this.contents.first
       })
@@ -217,12 +231,22 @@ export default {
     // })
     getHomeExp()
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         this.contents.second = res.data.result.data;
       })
       .catch((err) => {
         console.log("failed third");
       });
+    // getHomeVideos().then(res => {
+    //   console.log(res)
+    // }).catch(err => {
+    //   console.log(err + 'failed load videos')
+    // })
+    // getHomeShop().then(res => {
+    //    console.log(res)
+    // }).catch(err => {
+    //   console.log(err + 'failed load shopdata')
+    // })
   },
   mounted() {
     //组件挂载到html页面之后
@@ -237,10 +261,10 @@ export default {
     // console.log(this.$refs.tabControl.currentIndex)
   },
   activated(){
-    console.log('this is a activated happened')
+    // console.log('this is a activated happened')
   },
   deactivated(){
-    console.log('this is a deactivated')
+    // console.log('this is a deactivated')
   },
   methods: {
     backClick() {
@@ -258,11 +282,11 @@ export default {
       );
     },
     featureImgLoad() {
-      console.log(this.$refs.tabControl2.$el.offsetTop);
+      console.log('tabbar的高度是' + this.$refs.tabControl2.$el.offsetTop);
       this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop;
     },
     tabClick(index) {
-      console.log(index);
+      // console.log(index);
       switch (index) {//再tabcontrol被点击后根据index来切换传入hometest里的数据
         case 0:
           this.datas = this.contents.first;
@@ -275,6 +299,10 @@ export default {
       }
       this.$refs.tabControl1.currentIndex = index;
       this.$refs.tabControl2.currentIndex = index;//解决两个tabControl组件active属性不一样的问题
+    },
+    detailClick(){
+      // console.log('detail-print')
+      this.$router.push('/detail')
     }
   },
 };

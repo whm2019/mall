@@ -39,7 +39,7 @@ export default {
             // console.log(position);
             this.$emit('scroll',position)
         })
-        //3.监听scroll滚动到底部
+        //3.监听scroll滚动到底部，为“加载更多”这一功能作准备
         if(this.pullUpLoad){
             this.scroll.on('pullingUp',() =>{
                 this.$emit('pullingUp')

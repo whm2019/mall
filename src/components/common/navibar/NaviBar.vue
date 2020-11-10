@@ -17,10 +17,8 @@ export default {};
   height: 44px;
   line-height: 44px;
 }
-.navi-bar .left,
-.navi-bar .right {
+.left,.right{
   width: 60px;
-  background: red;
 }
 .center {
   flex: 1;

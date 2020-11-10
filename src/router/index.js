@@ -9,6 +9,7 @@ const ShopCart = () => import('views/shopcart/ShopCart')
 const Profile = () => import('views/profile/Profile')
 const HomeTest = () => import('views/home/children/HomeTest')
 const test = () => import('components/test')
+const Detail = () => import('views/detail/Detail')
 
 const routes = [
     {
@@ -22,6 +23,10 @@ const routes = [
             {
                 path: 'pop',
                 component: HomeTest
+            },
+            {
+                path: 'videos',
+                components: HomeTest
             },
             {
                 path: 'choiced',
@@ -40,6 +45,10 @@ const routes = [
     {
         path: '/profile',
         component: Profile
+    },
+    {
+        path: '/detail',
+        component: Detail
     }
 ]
 export default new Router({

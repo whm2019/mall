@@ -94,3 +94,39 @@ export function requestLocal(config){
 
     return instance(config)
 }
+
+export function requestVideos(config){
+    const instance = axios.create({
+        baseURL: '/some-videos',
+        timeout: 6000
+    })
+
+    return instance(config)
+}
+
+export function requestMogujie(config){
+    const instance = axios.create({
+        baseURL: "http://152.136.185.210:8000/api/w6",
+        timeout: 5000
+    })
+    axios.interceptors.request.use(config => {
+        return config;
+    }, err => {
+        console.log(err)
+    })
+
+    axios.interceptors.response.use(res => {
+        return res;
+    }, err => {
+        console.log(err)
+    })
+
+    return instance(config)
+}
+
+export function requestImg(config){
+    const instance = axios.create({
+        baseURL: '/imgbaidu'
+    })
+    return instance(config)
+}
