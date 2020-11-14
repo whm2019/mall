@@ -1,36 +1,30 @@
 <template>
-  <div class='buttom-bar'>
-    <div class='left'>
-      <div class='buttom-bar-item'>
-        <img src="~assets/img/detail/icon01.png" alt="">
+  <div class="buttom-bar">
+    <div class="left">
+      <div class="buttom-bar-item">
+        <img src="~assets/img/detail/icon01.png" alt="" />
         <div>客服</div>
       </div>
-      <div class='buttom-bar-item'>
-        <img src="~assets/img/detail/icon02.png" alt="">
+      <div class="buttom-bar-item">
+        <img src="~assets/img/detail/icon02.png" alt="" />
         <div>店铺</div>
       </div>
-      <div class='buttom-bar-item'>
-        <img src="~assets/img/detail/icon03.png" alt="">
+      <div class="buttom-bar-item">
+        <img src="~assets/img/detail/icon03.png" alt="" />
         <div>收藏</div>
       </div>
     </div>
-    <div class='center'>
-      加入购物车
-    </div>
-    <div class='right'>
-      购买
-    </div>
+    <div class="center">加入购物车</div>
+    <div class="right">购买</div>
   </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style scoped>
-.buttom-bar{
+.buttom-bar {
   position: relative;
   display: flex;
   bottom: 0;
@@ -45,30 +39,30 @@ export default {
 
   z-index: 9;
 }
-.buttom-bar img{
+.buttom-bar img {
   height: 24px;
   width: 24px;
 }
 
-.buttom-bar .left{
+.buttom-bar .left {
   flex: 2;
   display: flex;
 }
-.buttom-bar .left>div{
+.buttom-bar .left > div {
   flex: 1;
   padding: 2px 0;
 }
-.buttom-bar .center, .buttom-bar .right{
+.buttom-bar .center,
+.buttom-bar .right {
   flex: 1;
   line-height: 49px;
 }
 
-.center{
+.center {
   background: yellowgreen;
 }
-.right{
+.right {
   background: red;
   color: white;
 }
-
 </style>
