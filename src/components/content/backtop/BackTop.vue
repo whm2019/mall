@@ -18,9 +18,9 @@ export default {
 }
 .back-top img {
     width: 45px;
-    background: #f6f6f6;
+    background:#f6f6f6;
     border: outset;
-    border-radius: 8px;
+    /* border-radius: 50%; */
     opacity: .8;
 }
 </style>

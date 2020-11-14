@@ -1,7 +1,13 @@
 <template>
   <div class="detail">
-    <detail-navibar @itemClick="itemClick" ref='nav'></detail-navibar>
-    <scroll ref="scroll" :probeType="3" :pullUpLoad="true" class="content" @scroll='scroll'>
+    <detail-navibar @itemClick="itemClick" ref="nav"></detail-navibar>
+    <scroll
+      ref="scroll"
+      :probeType="3"
+      :pullUpLoad="true"
+      class="content"
+      @scroll="scroll"
+    >
       详情页
       <div ref="first">
         <ul>
@@ -426,25 +432,33 @@
         </ul>
       </div>
     </scroll>
+    <back-top @click.native="backTop" v-show="isBackTopShow"></back-top>
+    <buttom-bar></buttom-bar>
   </div>
 </template>
 
 <script>
 import detailNavibar from "./children/detailNavibar";
+import ButtomBar from './children/ButtomBar'
 import Scroll from "components/common/scroll/Scroll";
 
 import { getImg } from "network/home";
+
+import { backTopMixin } from "common/mixin";
+
 export default {
+  mixins: [backTopMixin],
   data() {
     return {
       offsetTops: [],
       imgUrl: "",
       positionY: Number
-    }
+    };
   },
   components: {
     detailNavibar,
     Scroll,
+    ButtomBar
   },
   methods: {
     itemClick(index) {
@@ -453,39 +467,39 @@ export default {
       this.$refs.scroll.scroll.scrollTo(0, -this.offsetTops[index], 200);
     },
     imgLoad() {
-      this.$refs.scroll.scroll.refresh();//当图片加载完毕后刷新可滚动高度值
+      this.$refs.scroll.scroll.refresh(); //当图片加载完毕后刷新可滚动高度值
 
-      this.offsetTops.push(this.$refs.first.offsetTop);//图片加载完毕后把各个子块的高度值存入数组
+      this.offsetTops.push(this.$refs.first.offsetTop); //图片加载完毕后把各个子块的高度值存入数组
       this.offsetTops.push(this.$refs.second.offsetTop);
       this.offsetTops.push(this.$refs.third.offsetTop);
       this.offsetTops.push(this.$refs.fourth.offsetTop);
-      this.offsetTops.push(Number.MAX_VALUE)//js中Number类的最大值
-      console.log(this.offsetTops)
+      this.offsetTops.push(Number.MAX_VALUE); //js中Number类的最大值
+      console.log(this.offsetTops);
     },
-    scroll(position){
-        this.positionY = -position.y
-        // console.log(this.offsetTops[0]
-        for(let i = 0; i < this.offsetTops.length - 1; i ++){
-            if(this.positionY < this.offsetTops[i+1]){
-                this.$refs.nav.currentIndex = i
-                break;//一旦找到数组中符合条件的最小值并传给currentIndex后即跳出循环
-            }
+    scroll(position) {
+      this.isBackTopShow = -position.y > 800;
+      this.positionY = -position.y;
+      // console.log(this.offsetTops[0]
+      for (let i = 0; i < this.offsetTops.length - 1; i++) {
+        if (this.positionY < this.offsetTops[i + 1]) {
+          this.$refs.nav.currentIndex = i;
+          break; //一旦找到数组中符合条件的最小值并传给currentIndex后即跳出循环
         }
-        // if(this.positionY < this.offsetTops[1]){
-        //     this.$refs.nav.currentIndex = 0
-        // }else if(this.positionY < this.offsetTops[2]){
-        //     this.$refs.nav.currentIndex = 1
-        // }else if(this.positionY < this.offsetTops[3]){            
-        //     this.$refs.nav.currentIndex = 2
-        // }else {
-        //     this.$refs.nav.currentIndex = 3
-        // }
-    }
+      }
+      // if(this.positionY < this.offsetTops[1]){
+      //     this.$refs.nav.currentIndex = 0
+      // }else if(this.positionY < this.offsetTops[2]){
+      //     this.$refs.nav.currentIndex = 1
+      // }else if(this.positionY < this.offsetTops[3]){
+      //     this.$refs.nav.currentIndex = 2
+      // }else {
+      //     this.$refs.nav.currentIndex = 3
+      // }
+    },
   },
   mounted() {
     this.imgUrl =
       "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1605006009624&di=21abb45a533e2fcce93fd3cc52dc9dcc&imgtype=0&src=http%3A%2F%2Fimg.pconline.com.cn%2Fimages%2Fupload%2Fupc%2Ftx%2Fwallpaper%2F1308%2F29%2Fc0%2F25038622_1377746019192.jpg";
-    
   },
 };
 </script>

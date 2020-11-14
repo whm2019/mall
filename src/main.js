@@ -1,8 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import VueLazyLoad from 'vue-lazyload'
 
 Vue.config.productionTip = false
+
+Vue.use(VueLazyLoad)//在项目中使用vue-lazyload
 
 Vue.prototype.$bus = new Vue()
 

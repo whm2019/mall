@@ -43,7 +43,7 @@ export default {
         if(this.pullUpLoad){
             this.scroll.on('pullingUp',() =>{
                 this.$emit('pullingUp')
-                // console.log('通过监听better-scroll的pullingUp事件来判断页面是否拉到了底部')
+                console.log('通过监听better-scroll的pullingUp事件来判断页面是否拉到了底部')
             })
         }
     },

@@ -9,7 +9,7 @@ const ShopCart = () => import('views/shopcart/ShopCart')
 const Profile = () => import('views/profile/Profile')
 const HomeTest = () => import('views/home/children/HomeTest')
 const test = () => import('components/test')
-const Detail = () => import('views/detail/Detail')
+const Detail = () => import('views/detail/Detail')//组件懒加载导入方式
 
 const routes = [
     {

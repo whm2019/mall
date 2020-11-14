@@ -1,6 +1,6 @@
 <template>
       <navi-bar class='navi-bar'>
-          <div slot='left' class='back'>
+          <div slot='left' class='back' @click='backClick'>
               <img src="~assets/img/back/Back.png" alt="">
           </div>
           <div slot='center' class='title'>
@@ -29,6 +29,10 @@ export default {
             // console.log(index)
             this.$emit('itemClick', index);
             this.currentIndex = index;
+        },
+        backClick(){
+            this.$router.back()//后退一步。和下面一句效果一致
+            // this.$router.go(-1)
         }
     }
 

@@ -1,7 +1,8 @@
 <template>
   <div class='home-test'>
       <div v-for='item in contents' :key='item.goods_id' class='home-test-item'>
-          <img :src="item.img" alt="" @load="imgLoad">
+          <!-- 用v-lazy的方式使用图片懒加载 -->
+          <img v-lazy="item.img" alt="" @load="imgLoad">
           <div>{{item.goods_id}}</div>
           <!-- <div>{{item.goods_name + '' + '￥' + parseInt(item.goods_price).toFixed(2)}}</div> -->
       </div>

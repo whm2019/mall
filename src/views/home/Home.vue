@@ -8,8 +8,8 @@
       class="tab-control tabControl"
       :path="['/home/pop', '/category', '/home/choiced']"
       v-show="isTabShow"
-      @tabClick='tabClick'
-      ref='tabControl1'
+      @tabClick="tabClick"
+      ref="tabControl1"
     >
     </tab-control>
 
@@ -140,7 +140,7 @@
         <li>comming100...</li>
       </ul>
     </scroll>
-    <back-top @click.native="backClick" v-show="isShow"></back-top>
+    <back-top @click.native="backTop" v-show="isBackTopShow"></back-top>
   </div>
 </template>
 
@@ -148,7 +148,6 @@
 import NaviBar from "components/common/navibar/NaviBar";
 import TabControl from "components/content/tabcontrol/TabControl";
 import Scroll from "components/common/scroll/Scroll";
-import BackTop from "components/content/backtop/BackTop";
 import test from "components/test";
 
 import HomeSwiper from "./children/HomeSwiper";
@@ -156,16 +155,19 @@ import RecommendView from "./children/RecommendView";
 import FeatureView from "./children/FeatureView";
 import HomeTest from "./children/HomeTest";
 
+import { backTopMixin } from "common/mixin";
+
 import {
   getHomeMutidata,
   getHomeContent,
   getHomeIt,
   getHomeExp,
   getHomeVideos,
-  getHomeShop
+  getHomeShop,
 } from "network/home";
 
 export default {
+  mixins:[backTopMixin],
   data() {
     return {
       banners: [], //用来接收从服务器请求的数据
@@ -174,7 +176,6 @@ export default {
         first: [],
         second: [],
       },
-      isShow: false,
       // {
       //   type: Boolean,
       //   default: false
@@ -192,21 +193,20 @@ export default {
     TabControl,
     HomeTest,
     Scroll,
-    BackTop,
     test,
   },
   created() {
-    this.banners=[
+    this.banners = [
       {
-        img: require('assets/img/swiper/1.jpg'),//require函数解决了图片不显示问题。
-                                                //同时这里assets前如果加上‘~’会报错
-        link: 'javascript:(void)0;'
+        img: require("assets/img/swiper/1.jpg"), //require函数解决了图片不显示问题。
+        //同时这里assets前如果加上‘~’会报错
+        link: "javascript:(void)0;",
       },
       {
-        img: require('assets/img/swiper/2.jpg'),
-        link: 'javascript:(void)0;'
-      }
-    ]
+        img: require("assets/img/swiper/2.jpg"),
+        link: "javascript:(void)0;",
+      },
+    ];
     // console.log(this.banners)
     // getHomeMutidata().then((res) => {
     //   //请求数据并赋给banners, recommends
@@ -217,9 +217,9 @@ export default {
     // alert(1);
     getHomeContent()
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         this.contents.first = res.data.data.list.list;
-        this.datas = this.contents.first
+        this.datas = this.contents.first;
       })
       .catch((err) => {
         console.log("failed!");
@@ -260,20 +260,15 @@ export default {
     });
     // console.log(this.$refs.tabControl.currentIndex)
   },
-  activated(){
+  activated() {
     // console.log('this is a activated happened')
   },
-  deactivated(){
+  deactivated() {
     // console.log('this is a deactivated')
   },
   methods: {
-    backClick() {
-      // console.log(this.$refs.scroll)
-      if (this.$refs.scroll.scroll)
-        this.$refs.scroll.scroll.scrollTo(0, 0, 300);
-    },
     contentScroll(position) {
-      this.isShow = -position.y > 300;
+      this.isBackTopShow = -position.y > 300;
       this.isTabShow = -position.y > this.tabOffsetTop;
     },
     pullingUp() {
@@ -282,12 +277,14 @@ export default {
       );
     },
     featureImgLoad() {
-      console.log('tabbar的高度是' + this.$refs.tabControl2.$el.offsetTop);
+      console.log("tabbar的高度是" + this.$refs.tabControl2.$el.offsetTop);
       this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop;
     },
     tabClick(index) {
       // console.log(index);
-      switch (index) {//再tabcontrol被点击后根据index来切换传入hometest里的数据
+      switch (
+        index //再tabcontrol被点击后根据index来切换传入hometest里的数据
+      ) {
         case 0:
           this.datas = this.contents.first;
           break;
@@ -298,12 +295,12 @@ export default {
           break;
       }
       this.$refs.tabControl1.currentIndex = index;
-      this.$refs.tabControl2.currentIndex = index;//解决两个tabControl组件active属性不一样的问题
+      this.$refs.tabControl2.currentIndex = index; //解决两个tabControl组件active属性不一样的问题
     },
-    detailClick(){
+    detailClick() {
       // console.log('detail-print')
-      this.$router.push('/detail')
-    }
+      this.$router.push("/detail");
+    },
   },
 };
 </script>
@@ -316,7 +313,7 @@ export default {
   background: var(--color-tint);
   color: white;
 
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;
@@ -342,7 +339,6 @@ export default {
   /* 为什么这里的高度减去49px是从底部减去49px？ */
   height: calc(100% - 93px);
   overflow-y: hidden;
-  margin-top: 44px;
   /* position: absolute;
   top: 44px;
   left: 0;
